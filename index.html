@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tooltip Example</title>
+    <style>
+        /* Style for the buttons */
+        .navbar-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .save-button .heart-icon {
+            color: red;
+        }
+
+        /* Style for the tooltip */
+        .tooltip {
+            visibility: hidden;
+            position: absolute;
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 10;
+            transition: visibility 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Save and Share buttons with tooltips -->
+    <div class="navbar-right">
+        <a href="#" class="button" id="share-button">Share</a>
+        <a href="#" class="button save-button" id="save-button">
+            Save <span class="heart-icon">&#9829;</span>
+        </a>
+    </div>
+    
+    <!-- Tooltip element -->
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        // Get the elements
+        const shareButton = document.getElementById('share-button');
+        const saveButton = document.getElementById('save-button');
+        const tooltip = document.getElementById('tooltip');
+
+        // Function to show tooltip with a specific message
+        function showTooltip(event, message) {
+            tooltip.textContent = message;
+            tooltip.style.visibility = 'visible';
+            tooltip.style.left = event.pageX + 'px';
+            tooltip.style.top = (event.pageY + 20) + 'px';
+        }
+
+        // Event listeners for Share button
+        shareButton.addEventListener('mouseover', (event) => showTooltip(event, "Click to share this page"));
+        shareButton.addEventListener('mouseout', () => tooltip.style.visibility = 'hidden');
+
+        // Event listeners for Save button
+        saveButton.addEventListener('mouseover', (event) => showTooltip(event, "Click to save this page"));
+        saveButton.addEventListener('mouseout', () => tooltip.style.visibility = 'hidden');
+    </script>
+</body>
+</html>
+
